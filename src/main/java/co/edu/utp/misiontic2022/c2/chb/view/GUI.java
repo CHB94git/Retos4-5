@@ -51,14 +51,14 @@ public class GUI extends JFrame {
         bancoNombre.setText("Conavi");
         panel.add(bancoNombre);
 
-        var btnBanco = new JButton("Proyectos Financiados por Conavi");
-        btnBanco.addActionListener(e -> cargarTablaProyectosFinanciadosConavi());
+        var btnBanco = new JButton("Proyectos Financiados por Banco");
+        btnBanco.addActionListener(e -> cargarTablaProyectosFinanciados());
         panel.add(btnBanco);
         btnBanco.setBackground(Color.BLACK);
         btnBanco.setForeground(Color.WHITE);
 
         var btnLideres = new JButton("Líderes que más gastan");
-        btnLideres.addActionListener(e -> cargarTablaLideresMasGastan());
+        btnLideres.addActionListener(e -> cargarTablaLideresQueMasGastan());
         panel.add(btnLideres);
         btnLideres.setBackground(Color.BLACK);
         btnLideres.setForeground(Color.WHITE);
@@ -83,7 +83,7 @@ public class GUI extends JFrame {
         
     }
 
-    private void cargarTablaProyectosFinanciadosConavi() {
+    private void cargarTablaProyectosFinanciados() {
         try {
             var tableModel = new BancoTableModel();
 
@@ -175,7 +175,7 @@ public class GUI extends JFrame {
         }
     }
 
-    private void cargarTablaLideresMasGastan() {
+    private void cargarTablaLideresQueMasGastan() {
         try {
             var tableModel = new LiderTableModel();
 
@@ -297,7 +297,7 @@ public class GUI extends JFrame {
                 case 0:
                     return "ID Proyecto";
                 case 1:
-                    return "Valor";
+                    return "Valor Adeudado";
 
             }
             return super.getColumnName(column);
@@ -325,5 +325,4 @@ public class GUI extends JFrame {
             return null;
         }
     }
-
 }
