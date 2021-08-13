@@ -80,7 +80,7 @@ public class GUI extends JFrame {
 
         tabla = new JTable();
         getContentPane().add(new JScrollPane(tabla), BorderLayout.CENTER);
-        tabla.setBackground(Color.LIGHT_GRAY);
+        
     }
 
     private void cargarTablaProyectosFinanciadosConavi() {
