@@ -1,6 +1,7 @@
 package co.edu.utp.misiontic2022.c2.chb;
 
-import co.edu.utp.misiontic2022.c2.chb.view.ReportesView;
+import co.edu.utp.misiontic2022.c2.chb.view.GUI;
+//import co.edu.utp.misiontic2022.c2.chb.view.ReportesView;
 
 public class App 
 {
@@ -14,7 +15,10 @@ public class App
         //var limiteInferior = 50_000d;
         //reportesView.totalAdeudadoPorProyectosSuperioresALimite(limiteInferior);
 
-        var reportesView = new ReportesView();
-        reportesView. lideresQueMasGastan();
+        //var reportesView = new ReportesView();
+        //reportesView. lideresQueMasGastan();
+
+        var formularioConsultas = new GUI();
+        formularioConsultas.setVisible(true);
     }
 }

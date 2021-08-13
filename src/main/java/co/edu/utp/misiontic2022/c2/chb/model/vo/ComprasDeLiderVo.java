@@ -4,6 +4,7 @@ public class ComprasDeLiderVo {
     
     private String lider;
     private Double valor;
+    
     public String getLider() {
         return lider;
     }
