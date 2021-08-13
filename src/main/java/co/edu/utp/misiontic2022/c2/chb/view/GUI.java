@@ -8,10 +8,12 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 
 import co.edu.utp.misiontic2022.c2.chb.controller.ReportesController;
@@ -22,6 +24,8 @@ import co.edu.utp.misiontic2022.c2.chb.model.vo.ProyectoBancoVo;
 public class GUI extends JFrame {
 
     private JTable tabla;
+    private JTextField bancoNombre;
+    private JTextField limInferior;
     private ReportesController controller;
 
     public GUI() {
@@ -29,7 +33,6 @@ public class GUI extends JFrame {
         initUI();
         setSize(1000, 650);
         setLocationRelativeTo(null);
-        
     }
 
     private void initUI() {
@@ -40,6 +43,13 @@ public class GUI extends JFrame {
         getContentPane().add(panel, BorderLayout.PAGE_END);
         panel.setBackground(Color.LIGHT_GRAY);
         
+        var bancoName = new JLabel();
+        bancoName.setText("Banco");
+        panel.add(bancoName);
+
+        bancoNombre = new JTextField(12);
+        bancoNombre.setText("Conavi");
+        panel.add(bancoNombre);
 
         var btnBanco = new JButton("Proyectos Financiados por Conavi");
         btnBanco.addActionListener(e -> cargarTablaProyectosFinanciadosConavi());
@@ -53,13 +63,20 @@ public class GUI extends JFrame {
         btnLideres.setBackground(Color.BLACK);
         btnLideres.setForeground(Color.WHITE);
 
-
+        
         var btnDeudasProyectos = new JButton("Deudas por proyectos");
         btnDeudasProyectos.addActionListener(e -> cargarTablaDeudasProyectos());
         panel.add(btnDeudasProyectos);
         btnDeudasProyectos.setBackground(Color.BLACK);
         btnDeudasProyectos.setForeground(Color.WHITE);
 
+        limInferior = new JTextField(7);
+        limInferior.setText(String.valueOf(50_000d));
+        panel.add(limInferior);
+
+        var inferior = new JLabel();
+        inferior.setText("Límite inferior");
+        panel.add(inferior);
 
         tabla = new JTable();
         getContentPane().add(new JScrollPane(tabla), BorderLayout.CENTER);
@@ -70,7 +87,9 @@ public class GUI extends JFrame {
         try {
             var tableModel = new BancoTableModel();
 
-            var lista = controller.listarProyectosFinanciadoConavi("Conavi");
+            var data1 = bancoNombre.getText();
+             
+            var lista = controller.listarProyectosFinanciadoConavi(data1);
 
             tableModel.setData(lista);
 
@@ -234,13 +253,16 @@ public class GUI extends JFrame {
     private void cargarTablaDeudasProyectos() {
         try {
             var tableModel = new DeudasProyectosTableModel();
+            
+            String data2 = limInferior.getText();
 
-            var lista = controller.listarDeudasPorProyectos(50_000d);
+            var lista = controller.listarDeudasPorProyectos(Double.parseDouble(data2));
 
             tableModel.setData(lista);
 
             tabla.setModel(tableModel);
-        } catch (SQLException e) {
+       
+         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), getTitle(), JOptionPane.ERROR_MESSAGE);
         }
     }
